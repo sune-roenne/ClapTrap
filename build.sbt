@@ -11,6 +11,8 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       "org.apache.pekko" %% "pekko-actor-typed" % PekkoVersion,
       "org.apache.pekko" %% "pekko-stream" % PekkoVersion,
-      "org.apache.pekko" %% "pekko-http" % PekkoHttpVersion
+      "org.apache.pekko" %% "pekko-http" % PekkoHttpVersion,
+      "org.apache.pekko" %% "pekko-http-spray-json" % PekkoHttpVersion
+
     )
   )

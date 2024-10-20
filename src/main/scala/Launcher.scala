@@ -1,3 +1,4 @@
+import api.ProfileApi
 import org.apache.pekko
 import org.apache.pekko.actor.ActorSystem
 import org.apache.pekko.http.scaladsl.Http
@@ -12,12 +13,11 @@ object Launcher
     implicit val actorSystem : ActorSystem = ActorSystem("claptrap")
     implicit val execCont : ExecutionContext = actorSystem.dispatcher
 
-    val route =
-      path("say-hello")
-        get
-          complete("Yo buddy!")
+    val routes = {
+      ProfileApi.routes
+    }
 
-    val binding = Http().newServerAt("localhost", 8081).bind(route)
+    val binding = Http().newServerAt("localhost", 8081).bind(routes)
 
     StdIn.readLine()
     for(bind <- binding)
