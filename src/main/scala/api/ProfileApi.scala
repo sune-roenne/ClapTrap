@@ -10,8 +10,6 @@ import spray.json.DefaultJsonProtocol.*
 import spray.json.RootJsonFormat
 
 
-import scala.concurrent.Future
-
 object ProfileApi {
 
   given profileFormat : RootJsonFormat[ProfileDto] = jsonFormat2(ProfileDto.apply)

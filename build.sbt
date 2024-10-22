@@ -12,7 +12,11 @@ lazy val root = (project in file("."))
       "org.apache.pekko" %% "pekko-actor-typed" % PekkoVersion,
       "org.apache.pekko" %% "pekko-stream" % PekkoVersion,
       "org.apache.pekko" %% "pekko-http" % PekkoHttpVersion,
-      "org.apache.pekko" %% "pekko-http-spray-json" % PekkoHttpVersion
-
+      "org.apache.pekko" %% "pekko-http-spray-json" % PekkoHttpVersion,
+      "org.bouncycastle" % "bcpkix-jdk18on" % "1.78.1",
+      "com.github.swagger-akka-http" %% "swagger-pekko-http" % "2.12.0",
+      "com.github.swagger-akka-http" %% "swagger-enumeratum-module" % "2.10.0",
+      "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.18.0",
+      "jakarta.ws.rs" % "jakarta.ws.rs-api" % "3.0.0"
     )
   )
