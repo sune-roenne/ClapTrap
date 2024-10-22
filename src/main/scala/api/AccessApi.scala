@@ -5,7 +5,7 @@ import org.apache.pekko.http.scaladsl.*
 import org.apache.pekko.http.scaladsl.server.{Directives, Route}
 import spray.json.DefaultJsonProtocol.*
 import spray.json.{CollectionFormats, JsonWriter, RootJsonFormat, RootJsonWriter}
-import jakarta.ws.rs.{Consumes, GET, POST, Produces}
+import jakarta.ws.rs.{Consumes, GET, POST, Path, Produces}
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.{Content, Schema}
 import io.swagger.v3.oas.annotations.parameters.RequestBody
@@ -15,6 +15,8 @@ import org.apache.pekko.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
 import java.time.LocalDateTime
 import java.time.temporal.{TemporalAmount, TemporalUnit}
 
+
+@Path("/access")
 object AccessApi extends Directives with StandardTypeFormats with SprayJsonSupport with CollectionFormats {
   import dateTimeFormat.given
 
@@ -27,6 +29,7 @@ object AccessApi extends Directives with StandardTypeFormats with SprayJsonSuppo
   @POST
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
+  @Path("/access-scope")
   @Operation(
     summary = "Creates new Access Scope",
     requestBody = new RequestBody(
@@ -50,6 +53,7 @@ object AccessApi extends Directives with StandardTypeFormats with SprayJsonSuppo
   @GET
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
+  @Path("/access-scopes")
   @Operation(
     summary = "Get all Access Scopes",
     responses = Array(
@@ -57,18 +61,22 @@ object AccessApi extends Directives with StandardTypeFormats with SprayJsonSuppo
     )
   )
   def getAccessScopes : Route =
-    path("access-scopes")
-      get {
-        complete {
-          List(
-            AccessScope("jdjd92", "scope:scopey", "DFDKSOEMdmgfo302+34032ir´+0fick",  LocalDateTime.now())
-          )
+    path("access-scopes" ) {
+      pathEndOrSingleSlash {
+        get {
+          complete {
+            List(
+              AccessScope("jdjd92", "scope:scopey", "DFDKSOEMdmgfo302+34032ir´+0fick", LocalDateTime.now())
+            )
+          }
         }
       }
+    }
 
-  def routes : Route =
-//    getAccessScopes ~
+  def routes : Route = concat(
+    getAccessScopes,
     createAccessScope
+  )
 
 }
 

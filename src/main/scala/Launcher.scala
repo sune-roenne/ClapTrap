@@ -1,8 +1,8 @@
-import api.{AccessApi, ProfileApi, SwaggerDocs}
+import api.{AccessApi, SwaggerDocs}
 import org.apache.pekko
 import org.apache.pekko.actor.ActorSystem
 import org.apache.pekko.http.scaladsl.Http
-import org.apache.pekko.http.scaladsl.model.*
+import org.apache.pekko.http.cors.scaladsl.CorsDirectives.cors
 import org.apache.pekko.http.scaladsl.server.Directives.*
 
 import scala.concurrent.ExecutionContext
@@ -13,11 +13,13 @@ object Launcher
     implicit val actorSystem : ActorSystem = ActorSystem("claptrap")
     implicit val execCont : ExecutionContext = actorSystem.dispatcher
 
-    val routes =
-      AccessApi.routes ~
+    val routes = concat(
+      pathPrefix("access")(AccessApi.routes),
       SwaggerDocs.routes
+    )
+    val routesWithCors = cors()(routes)
 
-    val binding = Http().newServerAt("localhost", 8081).bind(routes)
+    val binding = Http().newServerAt("localhost", 8081).bind(routesWithCors)
 
     StdIn.readLine()
     for(bind <- binding)
