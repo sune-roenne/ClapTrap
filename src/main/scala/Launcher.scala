@@ -1,4 +1,5 @@
 import api.{AccessApi, SwaggerDocs}
+import config.ClapTrapConfig
 import org.apache.pekko
 import org.apache.pekko.actor.ActorSystem
 import org.apache.pekko.http.scaladsl.Http
@@ -10,6 +11,7 @@ import scala.io.StdIn
 
 object Launcher
   @main def main() : Unit =
+    val certPath = ClapTrapConfig.Server.Https.Certificate.Path
     implicit val actorSystem : ActorSystem = ActorSystem("claptrap")
     implicit val execCont : ExecutionContext = actorSystem.dispatcher
 

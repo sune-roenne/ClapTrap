@@ -19,6 +19,7 @@ lazy val root = (project in file("."))
       "com.github.swagger-akka-http" %% "swagger-enumeratum-module" % "2.10.0",
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.18.0",
       "jakarta.ws.rs" % "jakarta.ws.rs-api" % "3.0.0",
-      "com.typesafe.slick" %% "slick" % "3.5.1"
+      "com.typesafe.slick" %% "slick" % "3.5.1",
+      "com.typesafe" % "config" % "1.4.3"
     )
   )
