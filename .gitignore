@@ -7,4 +7,4 @@ target
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /service-cert.pfx
-/src/test/resources/application.conf
+application.local.conf

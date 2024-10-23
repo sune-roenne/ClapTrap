@@ -20,6 +20,7 @@ lazy val root = (project in file("."))
       "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.18.0",
       "jakarta.ws.rs" % "jakarta.ws.rs-api" % "3.0.0",
       "com.typesafe.slick" %% "slick" % "3.5.1",
-      "com.typesafe" % "config" % "1.4.3"
+      "com.typesafe" % "config" % "1.4.3",
+      "commons-io" % "commons-io" % "2.17.0"
     )
   )

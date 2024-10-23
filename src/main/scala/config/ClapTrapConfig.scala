@@ -2,15 +2,18 @@ package config
 
 import com.typesafe.config.{ConfigFactory, ConfigParseOptions, ConfigResolveOptions}
 
+import java.io.File
+
 object ClapTrapConfig :
   private val localConfResolution = ConfigResolveOptions.defaults()
     .setAllowUnresolved(true)
-  private val config = ConfigFactory
-    .load("conf/application.local.conf", ConfigParseOptions.defaults().setAllowMissing(true), localConfResolution)
-    .withFallback(
-       ConfigFactory.load("conf/application.conf")
-    ).withFallback(ConfigFactory.load())
-
+  println(new File(".").getName)
+  private val localConfigFile = new File("./application.local.conf")
+  private val config =
+    if localConfigFile.exists()
+    then ConfigFactory.parseFile(localConfigFile)
+          .withFallback(ConfigFactory.load())
+    else ConfigFactory.load()
   object Server :
     private val serverConf = config.getConfig("server")
     object Https :
