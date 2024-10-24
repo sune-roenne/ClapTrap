@@ -14,7 +14,7 @@ import scala.concurrent.ExecutionContext
 import scala.io.StdIn
 
 object ClapTrapPekkoServer :
-  def statServer() : Unit =
+  def startServer() : Unit =
     implicit val actorSystem: ActorSystem = ActorSystem("claptrap")
     implicit val execCont: ExecutionContext = actorSystem.dispatcher
 

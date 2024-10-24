@@ -1,5 +1,7 @@
+import generation.ScopeKey
 
 object Launcher
   @main def main() : Unit =
-    ClapTrapPekkoServer.statServer()
+    ClapTrapPekkoServer.startServer()
+    //ScopeKey.generateKeys()
 

@@ -1,0 +1,6 @@
+-Dhttp.proxyHost=httpproxy.nykreditnet.net
+-Dhttp.proxyPort=8080
+-Dhttp.nonProxyHosts=*.svc\|*.convoy.svc\|*.security.svc\|*.cluster.local\|localhost\|127.0.0.1\|nykprdweu1acr1.azurecr.io
+-Dhttps.proxyHost=httpproxy.nykreditnet.net
+-Dhttps.proxyPort=8080
+-Dhttps.nonProxyHosts=*.svc\|*.convoy.svc\|*.security.svc\|*.cluster.local\|localhost\|127.0.0.1\|nykprdweu1acr1.azurecr.io

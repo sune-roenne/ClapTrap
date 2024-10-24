@@ -1,6 +1,6 @@
-ThisBuild / version := "0.1.0-SNAPSHOT"
+ThisBuild / version := "0.1.0"
 
-ThisBuild / scalaVersion := "3.3.4"
+ThisBuild / scalaVersion := "3.5.2"
 
 val PekkoVersion = "1.1.1"
 val PekkoHttpVersion = "1.1.0"
@@ -22,5 +22,19 @@ lazy val root = (project in file("."))
       "com.typesafe.slick" %% "slick" % "3.5.1",
       "com.typesafe" % "config" % "1.4.3",
       "commons-io" % "commons-io" % "2.17.0"
-    )
+    ),
+    Compile / packageBin / artifact := {
+      val prev : Artifact = (Compile/ packageBin / artifact).value
+      prev
+        .withName("claptrap-app.jar")
+        .withType("bundle")
+    },
+    retrieveManaged := true,
+    resolvers += ("Nykredit Central proxy" at "https://maven.nykreditnet.net/nexus/repository/central/").withAllowInsecureProtocol(true),
+    assembly / assemblyMergeStrategy := {
+      case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+      case x => MergeStrategy.first
+    },
+    assembly / assemblyJarName := "claptrap-app-assembly.jar"
+
   )
