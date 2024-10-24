@@ -15,7 +15,7 @@ import scala.io.StdIn
 
 object ClapTrapPekkoServer :
   def startServer() : Unit =
-    implicit val actorSystem: ActorSystem = ActorSystem("claptrap")
+    implicit val actorSystem: ActorSystem = ActorSystem(name = "claptrap", config = ClapTrapConfig.config)
     implicit val execCont: ExecutionContext = actorSystem.dispatcher
 
     val routes = concat(
@@ -55,7 +55,6 @@ object ClapTrapPekkoServer :
 
       engine
     )
-    returnee.sslContext
     returnee
 
 

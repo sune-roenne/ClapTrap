@@ -1,19 +1,19 @@
 package config
 
-import com.typesafe.config.{ConfigFactory, ConfigParseOptions, ConfigResolveOptions}
+import com.typesafe.config.{Config, ConfigFactory, ConfigParseOptions, ConfigResolveOptions}
 
 import java.io.File
 
 object ClapTrapConfig :
   private val localConfResolution = ConfigResolveOptions.defaults()
     .setAllowUnresolved(true)
-  println(new File(".").getName)
   private val localConfigFile = new File("./application.local.conf")
-  private val config =
-    if localConfigFile.exists()
+  val config : Config =
+    (if localConfigFile.exists()
     then ConfigFactory.parseFile(localConfigFile)
           .withFallback(ConfigFactory.load())
-    else ConfigFactory.load()
+    else ConfigFactory.load())
+      .withFallback(ConfigFactory.load("pekko.conf"))
   object Server :
     private val serverConf = config.getConfig("server")
     object Https :

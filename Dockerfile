@@ -25,6 +25,7 @@ RUN update-ca-certificates
 RUN keytool -import -trustcacerts -keystore /opt/java/openjdk/lib/security/cacerts -storepass changeit -noprompt -alias proxyroot -file /usr/local/share/ca-certificates/proxy-root.pem
 RUN keytool -import -trustcacerts -keystore /opt/java/openjdk/lib/security/cacerts -storepass changeit -noprompt -alias fortiproxy -file /usr/local/share/ca-certificates/forti-proxy.pem
 COPY --from=build /root/target/scala-3.5.2/claptrap-app-assembly.jar /app/claptrap-app.jar
+COPY application.local.conf application.local.conf
 WORKDIR /app
 ENTRYPOINT ["java", "-jar", "claptrap-app.jar"]
-#
+
