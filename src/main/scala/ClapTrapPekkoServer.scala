@@ -26,14 +26,13 @@ object ClapTrapPekkoServer :
 
     val sslContext = setupSslContext
     val httpsContext = setupHttpsContext(sslContext)
-    val binding = Http().newServerAt("localhost", 8081)
+    val binding = Http().newServerAt("localhost", ClapTrapConfig.Server.Port)
       .enableHttps(httpsContext)
       .bind(routesWithCors)
 
-    StdIn.readLine()
-    for (bind <- binding)
-      bind.unbind()
-    binding.onComplete(_ => actorSystem.terminate())
+//    for (bind <- binding)
+//      bind.unbind()
+//    binding.onComplete(_ => actorSystem.terminate())
 
   def setupSslContext : SSLContext =
     val certConf = ClapTrapConfig.Server.Https.Certificate

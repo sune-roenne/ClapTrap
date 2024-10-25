@@ -2,7 +2,7 @@ ThisBuild / version := "0.1.0"
 
 ThisBuild / scalaVersion := "3.5.2"
 
-val PekkoVersion = "1.1.1"
+val PekkoVersion = "1.1.2"
 val PekkoHttpVersion = "1.1.0"
 
 lazy val root = (project in file("."))
