@@ -8,3 +8,4 @@ target
 hs_err_pid*
 /service-cert.pfx
 application.local.conf
+db-volume/

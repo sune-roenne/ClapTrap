@@ -1,0 +1,44 @@
+version: '3.4'
+
+services:
+  claptrap.service:
+    profiles: ["all"]
+    container_name: claptrap.service
+    image: ${DOCKER_REGISTRY-}claptrap
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - Monitoring__OpenTelemetryCollectorUrl=http://cleanarchitecturetemplate.otel-collector:4317
+
+    ports:
+      - 8080:8080
+      - 8081:8081
+
+  claptrap.postgres:
+    profiles: ["all"]
+    container_name: claptrap.db.postgres
+    image: postgres
+    restart: always
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    #volumes:
+    #  - type: tmpfs
+    #    target: /dev/shm
+    #    tmpfs:
+    #      size: 134217728 # 128*2^20 bytes = 128Mb
+
+    environment:
+      POSTGRES_PASSWORD: Lo0kDontG0Us1ngThisAsAnActual_Password
+      POSTGRES_DB: claptrapdb
+      POSTGRES_USER: claptrap
+    ports:
+      - 8432:5432
+
+  claptrap.postgres.adminer:
+    profiles: ["all"]
+    image: adminer
+    restart: always
+    ports:
+      - 8431:8080
